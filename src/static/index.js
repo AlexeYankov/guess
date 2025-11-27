@@ -1,8 +1,3 @@
-const io = require("io")
+const socket = io("/")
 
-console.log(3)
-io("/")
-io.on("hello", fn());
-function fn () {
-    return console.log(34)
-}
+socket.on("hello", ()=> console.log('hi'))
