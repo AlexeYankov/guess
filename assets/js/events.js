@@ -13,4 +13,5 @@ export const events = {
   filled: "filled",
   renameNickname: "renameNickname",
   renamedUser: "renamedUser",
+  playerUpdate: "playerUpdate",
 };
