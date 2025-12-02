@@ -1,6 +1,11 @@
 import { handleNewUser, handleDisconnect } from "./notifications.js";
 import { handleNewMsg } from "./chat.js";
-import { handleBeganPath, handleBeganStrokePath, handleFillPath, handleFilledPath } from "./paint.js";
+import { handlePlayerUpdate } from "./players.js";
+import {
+  handleBeganPath,
+  handleBeganStrokePath,
+  handleFillPath,
+} from "./paint.js";
 
 let clientSocket = null;
 export const getSocket = () => clientSocket;
@@ -21,6 +26,7 @@ export const initSockets = (serverSocketConnection, nickname) => {
     handleBeganPath({ x, y });
   });
   clientSocket.on(events.strockedPath, ({ x, y, color }) => {
+    console.log(color);
     handleBeganStrokePath({ x, y, color });
   });
   clientSocket.on(events.filled, ({ color }) => {
@@ -29,4 +35,5 @@ export const initSockets = (serverSocketConnection, nickname) => {
   clientSocket.on(events.disconnected, ({ nickname }) => {
     handleDisconnect({ nickname, color: "#eb331bff" });
   });
+  clientSocket.on(events.playerUpdate, handlePlayerUpdate);
 };

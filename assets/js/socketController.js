@@ -4,6 +4,10 @@ let sockets = [];
 
 export const socketController = (socket, io) => {
   const broadcast = (event, data) => socket.broadcast.emit(event, data);
+  const superBroadcast = (event, data) => io.emit(event, data);
+  const sendPlayerUpdate = () =>
+    superBroadcast(events.playerUpdate, { sockets });
+
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
     sockets.push({ id: socket.id, nickname, points: 0 });
@@ -36,6 +40,7 @@ export const socketController = (socket, io) => {
   });
   socket.on(events.disconnect, () => {
     broadcast(events.disconnected, { nickname: socket.nickname });
-    sockets = sockets.filter((el) => el.nickname === socket.nickname);
+    sockets = sockets.filter((el) => el.nickname !== socket.nickname);
+    sendPlayerUpdate();
   });
 };

@@ -4,9 +4,9 @@ import { changeName } from "./utils.js";
 
 export const logIn = (nickname) => {
   const socket = io("/");
-  socket.emit(events.setNickname, { nickname });
   changeName(nickname);
   initSockets(socket, nickname);
+  socket.emit(events.setNickname, { nickname });
 };
 export const handleFormSubmit = (e) => {
   e.preventDefault;
@@ -18,4 +18,3 @@ export const handleFormSubmit = (e) => {
   body.className = LOGGED_IN;
   logIn(input.value);
 };
-

@@ -37,7 +37,7 @@ const beginPathStart = (x, y) => {
 const beginStrokePathStart = (x, y, color = null) => {
   let currentColor = ctx.strokeStyle;
   if (color !== null) {
-    ctx.strokeStyle = color;
+    currentColor = color;
   }
   ctx.lineTo(x, y);
   ctx.strokeStyle = currentColor;

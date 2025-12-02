@@ -1,0 +1,13 @@
+.gameStats {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  .gameControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    height: 100%;
+    width: 100%;
+  }
+}
