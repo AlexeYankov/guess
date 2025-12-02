@@ -6,15 +6,46 @@ html(lang="en")
         link(rel="stylesheet", href="/styles/styles.css")
         title Guess
     body 
+        div.renameBox
+            h4 Your current name: 
+            p#userName
+            input(placeholder="Rename current nickname", type="text", id="jsRename")
         .loginBox 
             form#jsLogin
                 input(placeholder="Whats your nickname", type="text", id="jsLogin")
+                
         .gameContainer#jsGame
-            h1 You are logged in
+            div
+                canvas#jsCanvas.canvas
+                .controls#controls
+                    .controls__range
+                                input#jsRange(type="range" min="0.1" max="5" value="2.5" step="0.1")
+
+                    .controls__btns
+                                button#jsMode Fill
+                                button#jsSave Save
+
+                    .controls__colors#jsColors
+                                .controls__color.jsColor(style="background-color:#2c2c2c")
+                                .controls__color.jsColor(style="background-color:white")
+                                .controls__color.jsColor(style="background-color:#FF9500")
+                                .controls__color.jsColor(style="background-color:#FFCC00")
+                                .controls__color.jsColor(style="background-color:#FF3B30")
+                                .controls__color.jsColor(style="background-color:#4CD963")
+                                .controls__color.jsColor(style="background-color:#5AC8FA")
+                                .controls__color.jsColor(style="background-color:#0579FF")
+                                .controls__color.jsColor(style="background-color:#5856D6")
+            div.chatContainer
+                div#online-users-container.users-container
+                .chat
+                    ul.chat__messages#jsMessages
+                    form.chat__form#jsSendMsg
+                        input(placeholder="Write a message", type="text")                           
         .chatNotification.slide-in-blurred-left#jsNotification
             .notificationContainer
                 h1#jsNotificationText
             button#jsNotificationClose &times;
+        
         script.
             window.events = !{events}
         script(src="socket.io/socket.io.js")

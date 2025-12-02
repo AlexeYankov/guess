@@ -1,21 +1,32 @@
 import { handleNewUser, handleDisconnect } from "./notifications.js";
+import { handleNewMsg } from "./chat.js";
+import { handleBeganPath, handleBeganStrokePath, handleFillPath, handleFilledPath } from "./paint.js";
 
-let socket = null;
-const getSocket = () => window.socket;
+let clientSocket = null;
+export const getSocket = () => clientSocket;
 
-export const updateSocket = (sockets) => {
-  socket = sockets;
+export const updateSocket = (socket) => {
+  clientSocket = socket;
 };
-export const initSockets = (sockett, nickname) => {
-  console.log(`current nickname, ${nickname}`);
+export const initSockets = (serverSocketConnection, nickname) => {
   const { events } = window;
-  updateSocket(sockett);
-  // socket.on(events.newUser, handleNewUser({ nickname }));
-  socket.on(events.newUser, ({ nickname }) => {
-    console.log("client new user", nickname);
+  updateSocket(serverSocketConnection);
+  clientSocket.on(events.newUser, ({ nickname }) => {
     handleNewUser({ nickname, color: "#4CAF50" });
   });
-  socket.on(events.disconnected, ({ nickname }) => {
+  clientSocket.on(events.newMsg, ({ message, nickname }) => {
+    handleNewMsg({ nickname, message });
+  });
+  clientSocket.on(events.beganPath, ({ x, y }) => {
+    handleBeganPath({ x, y });
+  });
+  clientSocket.on(events.strockedPath, ({ x, y, color }) => {
+    handleBeganStrokePath({ x, y, color });
+  });
+  clientSocket.on(events.filled, ({ color }) => {
+    handleFillPath({ color });
+  });
+  clientSocket.on(events.disconnected, ({ nickname }) => {
     handleDisconnect({ nickname, color: "#eb331bff" });
   });
 };

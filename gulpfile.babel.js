@@ -29,7 +29,7 @@ const js = () => gulp.src(paths.js.src).pipe(brf({transform: [
 export function styles() {
   return gulp
     .src(paths.styles.src)
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError)) // add monitoring scss errors! really useful!
     .pipe(
       autoPrefixer({
         overrideBrowserslist: ["last 10 versions"],

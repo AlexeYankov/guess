@@ -3,5 +3,14 @@ export const events = {
   newUser: "newUser",
   disconnect: "disconnect",
   disconnected: "disconnected",
+  sendMsg: "sendMsg",
+  newMsg: "newMsg",
+  beginPath: "beginPath",
+  beganPath: "beganPath",
+  strockePath: "strockePath",
+  strockedPath: "strockedPath",
+  fill: "fill",
+  filled: "filled",
+  renameNickname: "renameNickname",
+  renamedUser: "renamedUser",
 };
-

@@ -1,15 +1,15 @@
 export const fireNotification = (text, color) => {
   const notificationContainer = document.getElementById("jsNotification");
-
   const notificationText = document.getElementById("jsNotificationText");
+
   notificationContainer.style.display = "flex";
   notificationContainer.style.backgroundColor = color;
   notificationText.innerText = text;
+
   setTimeout(() => stopNotification(), 2000);
 };
 
 export const stopNotification = () => {
-  console.log("stop notification");
   const notificationContainer = document.getElementById("jsNotification");
   notificationContainer.style.display = "none";
 };

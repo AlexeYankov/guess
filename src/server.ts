@@ -25,8 +25,6 @@ const staticFilesDirectory = path.join(__dirname, "static");
 
 app.set("view engine", "pug");
 app.set("views", staticViewsFilesDirectory);
-// app.set("static", staticFilesDirectory);
-// app.use(express.static(staticViewsFilesDirectory));
 app.use(express.static(staticFilesDirectory));
 app.get("/", (req, res) =>
   res.render("home", { events: JSON.stringify(events) })
@@ -34,24 +32,8 @@ app.get("/", (req, res) =>
 
 const handleListening = () => console.log("server greetings");
 
-const sockets = [];
-
-// io.on("connection", function (socket: any) {
-//   console.log(sockets)
-//   socket.on("newMessage", ({ message }) => {
-//     socket.broadcast.emit("messageNotif", {
-//       message,
-//       nickname: socket.nickname || "Anonimouse",
-//     });
-//   });
-//   socket.on("setNickname", ({ nickname }) => {
-//     console.log(nickname, " connected")
-//     sockets.push(nickname)
-//     socket.nickname = nickname;
-//   });
-// });
 io.on("connection", function (socket: any) {
-  socketController(socket);
+  socketController(socket, io);
 });
 
 http.listen(PORT, handleListening);
